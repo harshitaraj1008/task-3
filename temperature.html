@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="tempCalc" onsubmit="calculateTemp(); return false">
+        <label for="temp">Please enter the temperature you'd like to convert.</label> <br>
+        <input name="temp" id="temp" type="number">
+        <select name="temp_diff" id="temp_diff">
+           <option value="1">°Celsius</option>
+           <option value="2">°Fahrenheit</option>
+        </select> <br>
+        <input name="temp" type="submit"> <br>
+        <span id="resultContainer"></span>
+    </form>
+</body>
+<script>
+    function calculateTemp() {
+        function celToFah(celsius) {
+            var fahrenheit = Math.round((celsius * (9 / 5)) + 32);
+            return fahrenheit;
+        }
+
+        function fahToCel(fahrenheit) {
+            var celsius = Math.round((fahrenheit - 32) * (5 / 9));
+            return celsius;
+        }
+
+        // Checks if Calsius or Fahrenheit is selected
+        var tempSelected = document.getElementById("temp_diff");
+        var valueTemp = tempSelected.options[tempSelected.selectedIndex].value;
+
+        // Checks the value inside the Temperature input
+        var numberTemp = document.getElementById("temp").value;
+
+        var result;
+
+        if (valueTemp == 1) {
+            result = celToFah(numberTemp);
+            document.getElementById("resultContainer").innerHTML = "Result is :- " + result + "°Fahrenheit";
+        } else {
+            result = fahToCel(numberTemp);
+            document.getElementById("resultContainer").innerHTML = "Result is :-  " + result + "°Celsius";
+        }
+
+    }
+</script>
+
+</html>
